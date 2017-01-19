@@ -1,13 +1,4 @@
-//this is a comment to test
-//automatic Git deployment 
-//for our droplet :)
-//
-//
-//
-//
-//
-//\
-//
+//live  ssh://root@104.236.154.248/root/repo.git (fetch)
 
 var app = require('./server-config.js');
 
