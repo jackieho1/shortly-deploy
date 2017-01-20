@@ -11,7 +11,7 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
@@ -171,37 +171,37 @@ xdescribe('', function() {
 
   describe('Account Creation:', function() {
 
-    it('Signup creates a new user', function(done) {
-      request(app)
-        .post('/signup')
-        .send({
-          'username': 'Svnh',
-          'password': 'Svnh' })
-        .expect(302)
-        .expect(function() {
-          User.findOne({'username': 'Svnh'})
-            .exec(function(err, user) {
-              expect(user.username).to.equal('Svnh');
-            });
-        })
-        .end(done);
-    });
+    // it('Signup creates a new user', function(done) {
+    //   request(app)
+    //     .post('/signup')
+    //     .send({
+    //       'username': 'Svnh',
+    //       'password': 'Svnh' })
+    //     .expect(302)
+    //     .expect(function() {
+    //       User.findOne({'username': 'Svnh'})
+    //         .exec(function(err, user) {
+    //           expect(user.username).to.equal('Svnh');
+    //         });
+    //     })
+    //     .end(done);
+    // });
 
-    it('Successful signup logs in a new user', function(done) {
-      request(app)
-        .post('/signup')
-        .send({
-          'username': 'Phillip',
-          'password': 'Phillip' })
-        .expect(302)
-        .expect(function(res) {
-          expect(res.headers.location).to.equal('/');
-          request(app)
-            .get('/logout')
-            .expect(200);
-        })
-        .end(done);
-    });
+    // it('Successful signup logs in a new user', function(done) {
+    //   request(app)
+    //     .post('/signup')
+    //     .send({
+    //       'username': 'Phillip',
+    //       'password': 'Phillip' })
+    //     .expect(302)
+    //     .expect(function(res) {
+    //       expect(res.headers.location).to.equal('/');
+    //       request(app)
+    //         .get('/logout')
+    //         .expect(200);
+    //     })
+    //     .end(done);
+    // });
 
   }); // 'Account Creation'
 
@@ -211,9 +211,10 @@ xdescribe('', function() {
       new User({
         'username': 'Phillip',
         'password': 'Phillip'
-      }).save(function() {
-        done();
-      });
+      }).save(function(err, user) {
+        //console.log('SAVE WITHIN ACCOUNT LOGIN', err, user);
+      })
+      .end(done);
     });
 
     it('Logs in existing users', function(done) {
